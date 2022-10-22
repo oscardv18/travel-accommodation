@@ -1,3 +1,3 @@
-module travel-accommodation-selection-service-provider
+module travel-accommodation
 
 go 1.19

@@ -1,5 +1,5 @@
 {
-  "name": "travel-accommodation-selection-service-provider",
+  "name": "travel-accommodation",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
