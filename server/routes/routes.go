@@ -2,19 +2,22 @@ package routes
 
 import (
 	"net/http"
+	"path/filepath"
+	"travel-accommodation/ui"
 )
 
 func Router() http.Handler {
 	mux := http.NewServeMux()
 
 	// home page
-	mux.HandleFunc("/", RootHandler)
+	routeRoot := http.HandlerFunc(rootHandler)
+	mux.Handle("/", rootMiddleware(routeRoot))
 
 	return mux
 }
 
 // root route handler
-func RootHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("WELCOME"))
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	http.ServeFile(w, r, filepath.Join(ui.MainFilePath, "index.html"))
 }

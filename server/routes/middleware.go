@@ -6,7 +6,7 @@ import (
 
 // middleware for root route
 // An middleware need of next function, this the value of return, when info passing of filters in the middleware returning this function and serve of route
-func RootMiddleware(next http.Handler) http.Handler {
+func rootMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" && r.Method == http.MethodGet {
 			next.ServeHTTP(w, r)
