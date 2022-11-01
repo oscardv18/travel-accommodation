@@ -2,8 +2,6 @@ package routes
 
 import (
 	"net/http"
-	"path/filepath"
-	"travel-accommodation/ui"
 )
 
 func Router() http.Handler {
@@ -19,5 +17,6 @@ func Router() http.Handler {
 // root route handler
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	http.ServeFile(w, r, filepath.Join(ui.MainFilePath, "index.html"))
+	w.Write([]byte("Hello from home path"))
+	// http.ServeFile(w, r, filepath.Join(ui.MainFilePath, "index.html"))
 }
