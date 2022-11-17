@@ -13,7 +13,7 @@ func rootMiddleware(next http.Handler) http.Handler {
 		} else {
 			http.Error(w, "404, not found", http.StatusNotFound)
 			w.WriteHeader(http.StatusNotFound)
-			// w.Write([]byte("404 Not Found"))
+			w.Write([]byte("404 Not Found"))
 			http.Error(w, "Method is not supported :(.", http.StatusNotFound)
 		}
 	})

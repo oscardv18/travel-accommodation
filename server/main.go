@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Starting Server at port 8080")
+	fmt.Println("Starting Server on port 8080")
 
 	if err := http.ListenAndServe(":8080", routes.Router()); err != nil {
 		log.Fatal(err)

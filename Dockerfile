@@ -1,9 +1,14 @@
-FROM node:18.12.0-alpine3.16
+FROM golang:1.19.3-bullseye
 
-RUN mkdir /home/travel-accommodation
+RUN apt update && apt upgrade -y && \
+    apt install -y git \
+    make openssh-client
 
-WORKDIR /home/travel-accommodation
+WORKDIR /home/travel-accommodation/server
 
-EXPOSE 4000
+RUN curl -fLo install.sh https://raw.githubusercontent.com/cosmtrek/air/master/install.sh \
+    && chmod +x install.sh && sh install.sh && cp ./bin/air /bin/air
 
-CMD npx vite --port=4000
+EXPOSE 8080
+
+CMD air

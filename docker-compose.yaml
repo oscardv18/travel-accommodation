@@ -11,30 +11,34 @@ services:
     networks:
       - frontend
   server:
-    image: golang:1.18.8-alpine3.16
-    working_dir: /home/travel-accommodation/
-    command: go run ./server/.
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /home/travel-accommodation/server
     ports:
       - 8080:8080
     volumes:
       - .:/home/travel-accommodation/
+    links:
+      - postgres
     networks:
       - frontend
       - backend
-  db:
+  postgres:
     image: postgres:alpine3.16
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=admin
+      - POSTGRES_USER=travel
       - POSTGRES_PASSWORD=secret
     networks:
       - backend
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    
+
 volumes:
   postgres-data:
+
 
 networks:
   frontend:
