@@ -1,11 +1,13 @@
 package db
 
-// insert data
+import (
+	"fmt"
+)
 
-// func InsertUserData(fname string, lname string, pnumber uint32) {
-// 	insertDynStmt := `INSERT INTO users(firstname,lastname,phonenumber) VALUES($1,$2,$3);`
-// 	asd, e := db.Exec(insertDynStmt, fname, lname, pnumber)
-// 	CheckError(e)
-// 	fmt.Println("New record saved in db")
-// 	fmt.Println(asd)
-// }
+// insert data
+func InsertUserData(fname string, lname string, email string, pnumber uint64) {
+	insertDynStmt := `INSERT INTO users(firstname,lastname,email,phonenumber) VALUES($1,$2,$3,$4)`
+	_, e := db.Exec(insertDynStmt, fname, lname, email, pnumber)
+	CheckError(e)
+	fmt.Println("New record saved in db")
+}

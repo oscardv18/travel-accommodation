@@ -3,17 +3,27 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"log"
+
+	_ "github.com/lib/pq"
 )
 
-// postgresql db connection
-var psqlconn = "postgresql://admin:secret@postgres/travel?sslmode=disable"
+const (
+	host     = "postgres"
+	port     = 5432
+	user     = "admin"
+	password = "secret"
+	dbname   = "travel"
+)
+
+var psqlInfo = fmt.Sprintf("host=%s port=%d user=%s "+
+	"password=%s dbname=%s sslmode=disable",
+	host, port, user, password, dbname)
+
+var db, err = sql.Open("postgres", psqlInfo)
 
 func Init() {
-	// open db
-	var db, err = sql.Open("postgres", psqlconn)
 	CheckError(err)
-
-	// close db
 	defer db.Close()
 
 	err = db.Ping()
@@ -24,8 +34,6 @@ func Init() {
 
 func CheckError(err error) {
 	if err != nil {
-		e := fmt.Errorf("error at save record %d", 3312)
-		// log.Fatal(err)
-		fmt.Println(e)
+		log.Fatal(err)
 	}
 }

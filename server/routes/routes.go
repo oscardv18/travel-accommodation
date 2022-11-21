@@ -28,7 +28,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 // db route handler
 func dbHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	// db.InsertUserData("Oscar", "Diaz", 4248275260)
-	db.Init()
+	db.InsertUserData("Oscar", "Diaz", "mail@mail.com", 4248275260)
 	w.Write([]byte("Query execute successfully"))
 }
