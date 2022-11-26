@@ -12,7 +12,7 @@ func Router() http.Handler {
 	routeRoot := http.HandlerFunc(rootHandler)
 	mux.Handle("/", rootMiddleware(routeRoot))
 
-	// db route
+	// db route, NOTE: this route is only for test the db connection
 	routeDb := http.HandlerFunc(dbHandler)
 	mux.Handle("/db", routeDb)
 
@@ -25,7 +25,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello from home path"))
 }
 
-// db route handler
+// db route handler, this function is only for test db connection
 func dbHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	db.InsertUserData("Oscar", "Diaz", "mail@mail.com", 4248275260)
